@@ -1,0 +1,14 @@
+
+2023/11/09 (01:23:28) | ===> btop++ v.1.2.13
+2023/11/09 (01:23:28) | WARNING: Failed to join _runner thread on exit!
+2023/11/09 (01:23:28) | ERROR: No response from Runner thread, quitting!
+
+2023/11/09 (01:30:24) | ===> btop++ v.1.2.13
+2023/11/09 (01:30:24) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:30:30) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:30:36) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:30:42) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:30:48) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:30:54) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:31:00) | ERROR: Stall in Runner thread, restarting!
+2023/11/09 (01:31:06) | ERROR: Stall in Runner thread, restarting!
