@@ -23,7 +23,7 @@ set linebreak
 set showbreak=↪
 set scrolloff=3
 set mousemodel=popup
-set mousescroll=ver:1,hor:6
+set mousescroll=ver:3,hor:6
 set confirm
 set history=500
 set autowrite
