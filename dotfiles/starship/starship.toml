@@ -38,7 +38,7 @@ truncation_symbol = "…/"
 # similar to mapped_locations in Oh My Posh:
 [directory.substitutions]
 "~" = " ~"
-"Documents" = " "
+"Documents" = "󰈙"
 "Downloads" = " "
 "Pictures" = " "
 "Videos" = " "
@@ -123,7 +123,7 @@ style = "fg:#cba6f7 bg:#2c324a"
 format = '[ $symbol ($version )]($style)'
 
 [nim]
-symbol = ""
+symbol = "󰆥"
 style = "fg:#cba6f7 bg:#2c324a"
 format = '[ $symbol ($version )]($style)'
 
@@ -168,7 +168,7 @@ style = "fg:#cba6f7 bg:#2c324a"
 format = '[ $symbol ($version )]($style)'
 
 [package]
-symbol = ""
+symbol = "󰏗"
 style = "fg:#cba6f7 bg:#2c324a"
 format = "[ $symbol $version]($style)"
 disabled = true
@@ -181,16 +181,16 @@ format = "[ $duration]($style)"
 disabled = true
 
 [jobs]
-symbol = "華"
+symbol = "󰖵"
 style = "fg:#f9e2af bg:#333a56"
 format = "[ $symbol]($style)"
 
 [battery]
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
-unknown_symbol = " "
-empty_symbol = " "
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰁽 "
+empty_symbol = "󰂎 "
 format = "[ $symbol$percentage ]($style bg:#333a56)"
 disabled = true
 
@@ -211,7 +211,7 @@ style = "bold #a6e3a1"
 disabled = true
 time_format = "%R"
 style = "bg:#3b4363"
-format = '[](fg:#2c324a $style)[  $time ](fg:#94e2d5 $style)'
+format = '[](fg:#2c324a $style)[ 󰁫 $time ](fg:#94e2d5 $style)'
 
 # Last param in the first line/row
 # fg:#3b4363 if time enabled

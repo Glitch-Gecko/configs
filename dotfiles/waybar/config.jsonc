@@ -34,7 +34,7 @@
     "custom/launcher": {
         "format": "{}",
         "tooltip": true,
-        "exec": "echo '{\"text\":\"\",\"tooltip\":\"Drun | Run\"}'",
+        "exec": "echo '{\"text\":\" \",\"tooltip\":\"Drun | Run\"}'",
         "return-type": "json",
         "on-click": "pkill wofi || wofi --show drun -n",
         "on-click-right": "pkill wofi || wofi --show run -n",
@@ -51,7 +51,7 @@
         "on-click": "activate"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": "󰍛 {usage}%",
         "tooltip": true,
         "on-click": "kitty --title btop sh -c 'btop'",
         "interval": 2
@@ -87,7 +87,7 @@
         "format": "{icon}{}",
         "format-icons": {
             // "Playing": " ", // Uncomment if not using the dynamic script
-            "Paused": " ",
+            "Paused": " ",
             "Stopped": "&#x202d;ﭥ " // This stop symbol is RTL. So &#x202d; is left-to-right override.
         },
         "escape": true,
@@ -109,19 +109,19 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format": "↕{bandwidthTotalBytes}",
         "format-disconnected": "{icon} No Internet",
-        "format-linked": " {ifname} (No IP)",
+        "format-linked": "󰊗 {ifname} (No IP)",
         "format-alt": "↕{bandwidthUpBytes} | ↕{bandwidthDownBytes}",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}  {gwaddr}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr} 󰊗 {gwaddr}",
         "tooltip-format-wifi": "{icon} {essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{icon} {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "{icon} Disconnected",
         "on-click-right": "nm-connection-editor",
         "format-icons": {
-            "ethernet": "",
+            "ethernet": "󰈀",
             "disconnected": "⚠",
             "wifi": [
-                "睊",
-                "直"
+                "󰖪 ",
+                "󰖩 "
             ]
         },
         "interval": 2
@@ -135,8 +135,8 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "headset": "",
+            "headphone": "󰋋",
+            "headset": "󰋎",
             "phone": "",
             "portable": "",
             "car": " ",
@@ -178,18 +178,18 @@
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
         // "format-good": "", // An empty format will hide the module
-        "format-full": " {capacity}%",
+        "format-full": "󰂅 {capacity}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
         ],
         "interval": 2
     },
