@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Rbenv
+export PATH="$HOME/.rbenv/shims:$PATH"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -113,6 +116,10 @@ alias bat="bat --paging=never"
 alias gen="genact -m bruteforce"
 alias matrix="cmatrix -ba -u 2"
 alias bonsai="cbonsai -liWC"
+alias code="codium"
+alias rdp="xfreerdp /dynamic-resolution /drive:share,/tmp +clipboard /cert:ignore"
+alias vpn="wg-quick up ~/Documents/Nic-s-Laptop.conf"
+alias proc="ps faxo user,uid,pid,ppid,tt,start,exe,command"
 
 open() {
     for file in $(printf '%s\n' "$@"); do (xdg-open "$file" &); done
