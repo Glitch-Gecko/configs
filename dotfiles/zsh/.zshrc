@@ -4,6 +4,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Rbenv
 export PATH="$HOME/.rbenv/shims:$PATH"
 
+# pwntools
+export PATH="$PATH:$HOME/.pwndbg-src/.venv/bin"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,7 +73,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git dirhistory zsh-autosuggestions)
+plugins=(git dirhistory zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,11 +100,14 @@ compinit
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias s='sudo'
+alias webup='python -m http.server 8000'
 alias vi='nvim'
 alias sudo='sudo '
 alias fetch='neofetch --kitty'
-alias la='ls -lA'
-alias ll='ls -l'
+alias ls='exa'
+alias la='exa -lA'
+alias ll='exa -l'
 alias lls='ls | lolcat'
 alias lla='la | lolcat'
 alias lll='ll | lolcat'
@@ -119,16 +125,108 @@ alias bonsai="cbonsai -liWC"
 alias code="codium"
 alias rdp="xfreerdp /dynamic-resolution /drive:share,/tmp +clipboard /cert:ignore"
 alias vpn="wg-quick up ~/Documents/Nic-s-Laptop.conf"
+alias novpn="wg-quick down ~/Documents/Nic-s-Laptop.conf"
 alias proc="ps faxo user,uid,pid,ppid,tt,start,exe,command"
+alias autoghidra="/home/nicolas/.ghidra.py"
+alias sss='searchsploit $1'
+alias ssx='searchsploit -x $1'
+alias ssm='searchsploit -m $1'
 
 open() {
     for file in $(printf '%s\n' "$@"); do (xdg-open "$file" &); done
 }
 
+scan() {
+    if [ -z ${RHOST+x} ]
+        then RHOST=$1; shift
+    else echo "RHOST is set to '$RHOST'"; fi
+    sudo rustscan --ulimit 5000 -a $RHOST -- -g 53 -T3 -Pn -sV --disable-arp-ping $@
+}
+
+target() {
+    RHOST=$1
+    HTTPRHOST=http://$RHOST/
+    HTTPSRHOST=https://$RHOST/
+}
+
+revsh() {
+    if [[ $1 ]]; then
+        port=$1
+    else
+        port=4444
+    fi
+    stty raw -echo; (echo 'python3 -c "import pty;pty.spawn(\"/bin/bash\")" || python -c "import pty;pty.spawn(\"/bin/bash\")"' ;echo "stty$(stty -a | awk -F ';' '{print $2 $3}' | head -n 1)"; echo reset;cat) | nc -lvnp $port && reset
+}
+
+ffuf-vhost() {
+    arg_count=3
+    if [[ $2 && $2 != -* ]]; then
+        wordlist=$2
+    else
+        wordlist='/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt'
+        arg_count=2
+    fi
+    ffuf -c -H "Host: FUZZ.$1" -u http://$1 -w $wordlist ${@: $arg_count};
+}
+
+ffuf-dir() {
+    arg_count=3
+    if [[ $2 && $2 != -* ]]; then
+        wordlist=$2
+    else
+        wordlist='/usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt'
+        arg_count=2
+    fi
+    ffuf -c -u $1FUZZ -w $wordlist ${@: $arg_count};
+}
+
+ffuf-php() {
+    arg_count=3
+    if [[ $2 && $2 != -* ]]; then
+        wordlist=$2
+    else
+        wordlist='/usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt'
+        arg_count=2
+    fi
+    ffuf -c -u $1FUZZ.php -w $wordlist ${@: $arg_count};
+}
+
+extract() {
+  if [ -z "$1" ]; then
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+  else
+    if [ -f $1 ]; then
+      case $1 in
+        *.tar.bz2)   tar xvjf $1    ;;
+        *.tar.gz)    tar xvzf $1    ;;
+        *.tar.xz)    tar xvJf $1    ;;
+        *.lzma)      unlzma $1      ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar x -ad $1 ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xvf $1     ;;
+        *.tbz2)      tar xvjf $1    ;;
+        *.tgz)       tar xvzf $1    ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *.xz)        unxz $1        ;;
+        *.exe)       cabextract $1  ;;
+        *)           echo "extract: '$1' - unknown archive method" ;;
+      esac
+    else
+      echo "$1 - file does not exist"
+    fi
+  fi
+}
+
+mcd()
+{
+    test -d "$1" || mkdir "$1" && cd "$1"
+}
+
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-
-
 
 fortune | cowsay -f stegosaurus | lolcat
 eval "$(starship init zsh)"

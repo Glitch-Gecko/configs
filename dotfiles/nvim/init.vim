@@ -39,6 +39,8 @@ syntax on
 set mouse=a
 set clipboard=unnamedplus
 set ttyfast
+map <C-x> <Esc>:w<CR>:!%:p<CR>
+nnoremap gb :ls<CR>:b<Space>
 
 augroup packer_user_config
   autocmd!
